@@ -32,26 +32,26 @@ int PrimesGenerator::count(bool* f, int s)
     return count;
 }
 
+std::vector<int> PrimesGenerator::get(bool* f, int s)
+{
+    std::vector<int> primes(count(f, s));
+    for (int i = 0, j = 0; i < s; i++)
+    {
+        if (f[i]) // если число простое
+            primes[j++] = i;
+    }
+    return primes; // возвратить простые числа
+}
+
 std::vector<int> PrimesGenerator::generatePrimes(int maxValue)
 {
   if (maxValue >= 2) // единственный допустимый случай
   {
-    // объявления
     int s = maxValue + 1; // размер массива
     bool* f = new bool[s];
-    int i;
     set(f, s);
-    // решето
-    int j;
     metod(f, s);
-    // сколько есть простых чисел?
-    std::vector<int> primes(count(f,s));
-    for (i = 0, j = 0; i < s; i++)
-    {
-      if (f[i]) // если число простое
-        primes[j++] = i;
-    }
-    return primes; // возвратить простые числа
+    return get(f,s); // возвратить простые числа
   }
   else // maxValue < 2
     return std::vector<int>(0); // возвратить пустой массив, 
