@@ -1,5 +1,14 @@
 #include "PrimesGenerator.h"
 
+void PrimesGenerator::set(bool* f, int s)
+{
+    // инициализировать массив значениями true
+    for (int i = 0; i < s; i++)
+        f[i] = true;
+    // избавиться от известных не простых чисел
+    f[0] = f[1] = false;
+}
+
 std::vector<int> PrimesGenerator::generatePrimes(int maxValue)
 {
   if (maxValue >= 2) // единственный допустимый случай
@@ -8,11 +17,7 @@ std::vector<int> PrimesGenerator::generatePrimes(int maxValue)
     int s = maxValue + 1; // размер массива
     bool* f = new bool[s];
     int i;
-    // инициализировать массив значениями true
-    for (i = 0; i < s; i++)
-      f[i] = true;
-    // избавиться от известных не простых чисел
-    f[0] = f[1] = false;
+    set(f, s);
     // решето
     int j;
     for (i = 2; i < sqrt(s) + 1; i++)

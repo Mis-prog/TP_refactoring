@@ -15,6 +15,8 @@
 
 class PrimesGenerator
 {
+private:
+	static void set(bool* f, int s);
   // @param maxValue - предел генерации
 public:
   static std::vector<int> generatePrimes(int maxValue);
