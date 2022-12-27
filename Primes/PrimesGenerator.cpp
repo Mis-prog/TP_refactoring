@@ -9,6 +9,18 @@ void PrimesGenerator::set(bool* f, int s)
     f[0] = f[1] = false;
 }
 
+void PrimesGenerator::metod(bool* f, int s)
+{
+    for (int i = 2; i < sqrt(s) + 1; i++)
+    {
+        if (f[i]) // если i не вычеркнуто, вычеркнуть кратные ему числа
+        {
+            for (int j = 2 * i; j < s; j += i)
+                f[j] = false;  // кратное число не является простым
+        }
+    }
+}
+
 std::vector<int> PrimesGenerator::generatePrimes(int maxValue)
 {
   if (maxValue >= 2) // единственный допустимый случай
@@ -20,14 +32,7 @@ std::vector<int> PrimesGenerator::generatePrimes(int maxValue)
     set(f, s);
     // решето
     int j;
-    for (i = 2; i < sqrt(s) + 1; i++)
-    {
-      if (f[i]) // если i не вычеркнуто, вычеркнуть кратные ему числа
-      {
-        for (j = 2 * i; j < s; j += i)
-          f[j] = false;  // кратное число не является простым
-      }
-    }
+    metod(f, s);
     // сколько есть простых чисел?
     int count = 0;
     for (i = 0; i < s; i++)
