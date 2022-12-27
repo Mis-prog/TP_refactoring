@@ -21,6 +21,17 @@ void PrimesGenerator::metod(bool* f, int s)
     }
 }
 
+int PrimesGenerator::count(bool* f, int s)
+{
+    int count = 0;
+    for (int i = 0; i < s; i++)
+    {
+        if (f[i])
+            count++; // увеличить счетчик
+    }
+    return count;
+}
+
 std::vector<int> PrimesGenerator::generatePrimes(int maxValue)
 {
   if (maxValue >= 2) // единственный допустимый случай
@@ -34,13 +45,7 @@ std::vector<int> PrimesGenerator::generatePrimes(int maxValue)
     int j;
     metod(f, s);
     // сколько есть простых чисел?
-    int count = 0;
-    for (i = 0; i < s; i++)
-    {
-      if (f[i])
-        count++; // увеличить счетчик
-    }
-    std::vector<int> primes(count);
+    std::vector<int> primes(count(f,s));
     for (i = 0, j = 0; i < s; i++)
     {
       if (f[i]) // если число простое
